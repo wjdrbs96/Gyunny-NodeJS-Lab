@@ -5,7 +5,7 @@ const resMessage = require('../modules/responseMessage');
 const util = require('../modules/util');
 const statusCode = require('../modules/statusCode');
 const crypto = require('../modules/crypto'); 
-
+const jwt = require('../modules/jwt');
 
 router.post('/signup', async(req, res) => {
     const {loginId, password, name, email} = req.body;
@@ -53,9 +53,12 @@ router.post('/signin', async(req, res) => {
         res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, resMessage.MISS_MATCH_PW));
         return;
     }
+    
+    const {token, _} = await jwt.sign(user[0]);
 
-
-    res.status(statusCode.OK).send(util.success(statusCode.OK, resMessage.LOGIN_SUCCESS, loginId));
+    res.status(statusCode.OK).send(util.success(statusCode.OK, resMessage.LOGIN_SUCCESS, {
+        AccessToken : token
+    }));
 
 })
 
