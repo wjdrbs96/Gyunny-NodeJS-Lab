@@ -26,7 +26,6 @@ const user = {
             if (result.length === 0) {
                 return false;     // 아이디가 존재하지 않을 때
             }
-
             return true;          // 아이디가 존재할 때
 
         } catch(err) {
@@ -36,7 +35,18 @@ const user = {
             console.log('signUp ERROR : ', err);
             throw err;
         }
-    } 
+    },
+    
+    getUserById : async(loginId) => {
+        const query = `SELECT * FROM ${table} WHERE loginId = "${loginId}"`;
+        try {
+            const result = await pool.queryParam(query);
+            return result;
+        } catch(err) {
+            console.log(err);
+            throw err;
+        }
+    }
 }
 
 module.exports = user;

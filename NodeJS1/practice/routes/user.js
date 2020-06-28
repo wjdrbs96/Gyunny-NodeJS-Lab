@@ -30,8 +30,33 @@ router.post('/signup', async(req, res) => {
     let user = [loginId, name, email];
 
     res.status(statusCode.OK).send(util.success(statusCode.OK, resMessage.CREATED_USER, user))
-    
-    
+})
+
+
+router.post('/signin', async(req, res) => {
+    const {loginId, password} = req.body;
+
+    if (!loginId || !password) {
+        res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST,resMessage.NULL_VALUE));
+        return;
+    }
+
+    const user = await User.getUserById(loginId);
+    if (user.length === 0) {
+        res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, resMessage.NO_USER));
+        return;
+    }
+
+    const hashed = await crypto.encryptWithSalt(password, user[0].salt);
+
+    if (hashed !== user[0].password) {
+        res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, resMessage.MISS_MATCH_PW));
+        return;
+    }
+
+
+    res.status(statusCode.OK).send(util.success(statusCode.OK, resMessage.LOGIN_SUCCESS, loginId));
+
 })
 
 module.exports = router;
