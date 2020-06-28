@@ -1,5 +1,4 @@
 const poolPromise = require('../config/database');
-const { catch, catch } = require('../config/database');
 
 module.exports = {
     queryParam : async(query) => {
@@ -9,10 +8,10 @@ module.exports = {
                 const connection = await pool.getConnection();
                 try {
                     const result = await connection.query(query);
-                    pool.releaseConnection(connection);    // connection ??
-                    resolve(resolve);
+                    pool.releaseConnection(connection);   
+                    resolve(result);
                 } catch(err) {
-                    pool.releaseConnection(connection);    // connection ??
+                    pool.releaseConnection(connection);    
 
                 }
 
@@ -29,7 +28,7 @@ module.exports = {
                 const connection = await pool.getConnection();
                 try {
                     const result = await connection.query(query, value);
-                    resolve(result)
+                    resolve(result);
                 } catch (err) {
                     pool.releaseConnection(connection);
                     reject(err);
