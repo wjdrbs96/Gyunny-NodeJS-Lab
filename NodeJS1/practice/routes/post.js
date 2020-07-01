@@ -12,8 +12,18 @@ router.get('/', async(req, res) => {
 
 router.post('/write', async(req, res) => {
     const {author, title, content} = req.body;
+});
+
+router.get('/:idx', async(req, res) => {
+    const postIdx = req.params.idx;
+
+    if (await Post.checkPostId(postIdx) == false) {
+        res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, resMessage.BAD_POSTIdx));
+        return;
+    }
     
-    
+    const result = await Post.findOne(postIdx);
+    res.status(statusCode.OK).send(util.success(statusCode.OK, resMessage.POST_SUCCESS, result));
 })
 
 module.exports = router;

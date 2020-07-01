@@ -17,6 +17,36 @@ const post = {
         }
     },
 
+    checkPostId : async(postIdx) => {
+        const query = `SELECT * FROM post where postIdx = ${postIdx}`;
+        try {
+            const result = pool.queryParam(query);
+            if (result.length === 0) {
+                return false;
+            }
+            return true;
+
+        } catch(err) {
+            console.log('post error');
+            
+        }
+    },
+
+    findOne : async(postIdx) => {
+        const query = `SELECT * FROM post where postIdx = ${postIdx}`;
+        try {
+            const result = pool.queryParam(query);
+            return result;
+        } catch(err) {
+            if (err.errno = 1062) {
+                console.log("error");
+                return -1;
+            }
+
+            throw err;
+        }
+    }
+
     
 }
 
