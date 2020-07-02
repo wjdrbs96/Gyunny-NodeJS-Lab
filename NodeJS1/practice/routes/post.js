@@ -10,6 +10,7 @@ router.get('/', async(req, res) => {
     res.status(statusCode.OK).send(util.success(statusCode.OK, resMessage.POST_SUCCESS, result));
 });
 
+
 router.post('/write', async(req, res) => {
     const {author, title, content} = req.body;
 });
@@ -24,6 +25,21 @@ router.get('/:idx', async(req, res) => {
     
     const result = await Post.findOne(postIdx);
     res.status(statusCode.OK).send(util.success(statusCode.OK, resMessage.POST_SUCCESS, result));
+});
+
+router.delete('/:idx', async(req, res) => {
+    const postIdx = req.params.idx;
+    console.log(postIdx);
+
+    if (await Post.checkPostId(postIdx) == false) {
+        res.status(statusCode.OK).send(util.fail(statusCode.OK, resMessage.POST_INDEX_OUT))
+        return;
+    }
+    
+    const result = await Post.deletePost(postIdx);
+    
+    res.status(statusCode.OK).send(util.success(statusCode.OK, resMessage.deletePost, result));
 })
+
 
 module.exports = router;

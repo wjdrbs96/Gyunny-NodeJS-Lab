@@ -62,12 +62,11 @@ const user = {
     
         // 로그인이 성공적으로 마쳤다면 - LOGIN_SUCCESS 전달
         res.status(statusCode.OK)
-            .send(util.success(statusCode.OK, resMessage.LOGIN_SUCCESS, { accessToken : token}));
+            .send(util.success(statusCode.OK, resMessage.LOGIN_SUCCESS, { 
+                accessToken : token,
+                user : user[0]
+            }));
     },
-
-    test : async(req, res) => {
-        idx = req.params 
-    }
 
 }
 

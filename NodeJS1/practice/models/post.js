@@ -45,9 +45,21 @@ const post = {
 
             throw err;
         }
-    }
+    },
 
-    
+    deletePost : async(postIdx) => {
+        const query = `DELETE FROM post WHERE postIdx = ${postIdx}`;
+        try {
+            const result = pool.queryParam(query);
+            return result;
+        }catch(err) {
+            if (err.errno == 1062) {
+                console.log('Delete error');
+            }
+
+            throw err;
+        }
+    }
 }
 
 module.exports = post;
