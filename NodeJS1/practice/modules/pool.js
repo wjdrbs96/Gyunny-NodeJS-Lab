@@ -12,7 +12,6 @@ module.exports = {
                     resolve(result);
                 } catch(err) {
                     pool.releaseConnection(connection);    
-
                 }
 
             } catch(err) {

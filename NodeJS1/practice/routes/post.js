@@ -10,9 +10,13 @@ router.get('/', async(req, res) => {
     res.status(statusCode.OK).send(util.success(statusCode.OK, resMessage.POST_SUCCESS, result));
 });
 
-
 router.post('/write', async(req, res) => {
     const {author, title, content} = req.body;
+
+    const result = await Post.insertPost(author, title, content);
+
+    res.status(statusCode.OK).send(util.success(statusCode.OK, resMessage.POST_SUCCESS_Write, result));
+
 });
 
 router.get('/:idx', async(req, res) => {

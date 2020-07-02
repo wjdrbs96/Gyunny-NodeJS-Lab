@@ -47,6 +47,17 @@ const post = {
         }
     },
 
+    insertPost : async(author, title, content) => {
+        const query = `INSERT INTO post (author, title, content) VALUES(${author}, ${title}, ${content})`;
+        try {
+            const result = await pool.queryParam(query);
+            return result; 
+        } catch(err) {
+            console.log(err);
+            throw err;
+        }
+    },
+
     deletePost : async(postIdx) => {
         const query = `DELETE FROM post WHERE postIdx = ${postIdx}`;
         try {
