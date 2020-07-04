@@ -4,6 +4,8 @@ const Post = require('../models/post');
 const resMessage = require('../modules/responseMessage');
 const util = require('../modules/util');
 const statusCode = require('../modules/statusCode');
+const Hangul = require('hangul-js');
+const ChosungSearch = require('hangul-chosung-search-js')
 
 router.get('/', async(req, res) => {
     const result = await Post.findAll();
@@ -33,7 +35,6 @@ router.get('/:idx', async(req, res) => {
 
 router.delete('/:idx', async(req, res) => {
     const postIdx = req.params.idx;
-    console.log(postIdx);
 
     if (await Post.checkPostId(postIdx) == false) {
         res.status(statusCode.OK).send(util.fail(statusCode.OK, resMessage.POST_INDEX_OUT))
@@ -44,6 +45,7 @@ router.delete('/:idx', async(req, res) => {
     
     res.status(statusCode.OK).send(util.success(statusCode.OK, resMessage.deletePost, result));
 })
+
 
 
 module.exports = router;

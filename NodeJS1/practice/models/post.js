@@ -63,13 +63,26 @@ const post = {
         try {
             const result = pool.queryParam(query);
             return result;
-        }catch(err) {
+        } catch(err) {
             if (err.errno == 1062) {
                 console.log('Delete error');
             }
 
             throw err;
         }
+    },
+
+    test : async() => {
+        const query = `SELECT title, author FROM post`;
+        try {
+            const result = await pool.queryParam(query);
+            return result;
+        } catch(err) {
+            if (err.errno == 1062) {
+                console.log('Error');
+            }
+            throw err;
+        }     
     }
 }
 
