@@ -68,6 +68,14 @@ const user = {
             }));
     },
 
+    test : async(req, res) => {
+        const user = await User.all();
+        console.log(user);
+
+        
+    }
+    
+
 }
 
 module.exports = user;

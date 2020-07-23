@@ -46,6 +46,17 @@ const user = {
             console.log(err);
             throw err;
         }
+    },
+
+    all : async() => {
+        const query = `SELECT * from user`;
+        try {
+            const result = await pool.queryParam(query);
+            console.log(result);
+            return result;
+        } catch(err) {
+            throw err;
+        }
     }
 }
 

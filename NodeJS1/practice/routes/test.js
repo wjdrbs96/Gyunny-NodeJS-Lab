@@ -29,4 +29,10 @@ router.post('/eng', async(req, res) => {
   
 })
 
+router.post('/search', async(req, res) => {
+    const {result} = req.body;
+    console.log(result);
+})
+
+
 module.exports = router;
