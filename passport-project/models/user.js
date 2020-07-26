@@ -2,7 +2,6 @@ const table = 'user';
 const poolPromise = require('../config/database');
 const pool = require('../modules/pool'); 
 
-
 const user = {
   getUserByName: async(username) => {
     const query = `SELECT * FROM ${table} WHERE name = ${username}`;
