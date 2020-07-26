@@ -3,7 +3,6 @@ const LocalStrategy = require('passport-local').Strategy;
 const User = require('../models/user');
 const encrypt = require('../modules/encrypt');
 
-
 passport.use(new LocalStrategy(
   async(username, password, done) => {
     const result = await User.getUserById(username);
