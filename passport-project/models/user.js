@@ -45,7 +45,7 @@ const user = {
     const query = `INSERT INTO ${table} (${fields}) VALUES(${questions})`;
     try {
       const result = await pool.queryParam(query);
-      return result;
+      return result.id;
     } catch(err) {
       console.log(err);
       throw err;
