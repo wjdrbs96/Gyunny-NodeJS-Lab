@@ -4,7 +4,7 @@ const request = require('request');
 
 
 let kakaoOptions = {
-  uri: `https://dapi.kakao.com/v3/search/book?target=title`,
+  url: `https://dapi.kakao.com/v3/search/book?target=title`,
   method: 'GET',
   headers: {
     'Authorization': 'KakaoAK 856ec0be1a62b01007353103f2cbc64d'
@@ -17,7 +17,10 @@ let kakaoOptions = {
 
 request(kakaoOptions, function (err, res, body) {
   if (!err && res.statusCode == 200) {
-    console.log(JSON.parse(body));
+    //console.log(JSON.parse(body));
+    console.log(JSON.parse(body).documents[0].authors[0]);
+    console.log(JSON.parse(body).documents[0].datetime);
+    console.log(JSON.parse(body).documents[0].isbn);
   }  
 })
 
