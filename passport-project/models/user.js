@@ -1,6 +1,6 @@
-const table = 'user';
 const poolPromise = require('../config/database');
 const pool = require('../modules/pool'); 
+const table = 'user';
 
 const user = {
   getUserByName: async(username) => {

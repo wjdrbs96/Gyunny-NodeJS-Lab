@@ -18,5 +18,19 @@ module.exports = {
       }
     })
   },
+  encryptWithSalt: async(password, salt) => {
+    return new Promise(async(resolve, reject) => {
+      try {
+        pbkdf2.pbkdf2(password, salt, 1, 32, 'sha512', (err, derivedKey) => {
+          if (err) throw err;
+          const hashed = derivedKey.toString('hex');
+          resolve(hashed);
+        })
+      } catch (err) {
+        console.log(err);
+        throw err;
+      }
+    })
+  }
   
 }
