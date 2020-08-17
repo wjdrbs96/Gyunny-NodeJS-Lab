@@ -11,9 +11,9 @@ const kakaoKey = {
 
 
 passport.use("kakao-login", new KakaoStrategy(kakaoKey, (accessToken, refreshToken, profile, done) => {
-    console.log(profile);
-    console.log('accessToken: ' + accessToken);
-    console.log('refreshToken: ' + refreshToken);
+    //console.log(profile);
+    //console.log('accessToken: ' + accessToken);
+    //console.log('refreshToken: ' + refreshToken);
   })
 );
 
