@@ -4,8 +4,11 @@ const request = require('request');
 const kakaoOptions = require('../config/kakao');
 
 router.get('/', async(req, res) => {
-  const title = req.params.query;
-  request(kakaoOptions, function (err, res, body) {
+  const {title} = req.query;
+  const test = await kakaoOptions.kakaoTest(title);
+  console.log(test);
+
+  request(test, function (err, res, body) {
     if (!err && res.statusCode == 200) {
       console.log(JSON.parse(body));
       console.log(JSON.parse(body).documents[0].authors[0]);
