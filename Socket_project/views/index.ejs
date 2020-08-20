@@ -65,6 +65,10 @@
       $('#messages').append($('<li>').text(msg.name + '  :  ' +
         msg.messege));
     });
+    socket.on('nickName', (msg) => {
+      $('#nickName').append($('<li>').text(msg.name + '  :  ' +
+        msg.messege));
+    });
 
   });
 </script>

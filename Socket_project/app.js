@@ -18,8 +18,9 @@ app.io.on('connection', (socket) => {
       console.log('유저 나갔다');
   });
 
-  socket.on('chat-msg', (msg) => {
+  socket.on('chat-msg', (msg, nickName) => {
     app.io.emit('chat-msg', msg);
+    app.io.emit('nickname', nickName);
   });
 });
 
