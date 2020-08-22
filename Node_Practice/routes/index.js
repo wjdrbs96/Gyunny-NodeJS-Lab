@@ -4,9 +4,9 @@ const http = require('http');
 
 
 http.createServer((req, res) => {
-  res.writeHead(200, {'Content-Type' : 'text/html; charset=utf-8'});
-  res.write('<h1>Hello Node!</h1>');
-  res.end('<p>Hello Server!</p>');
+  console.log(req.url, req.headers.cookie);
+  res.writeHead(200, {'Set-Cookie' : 'mycookie=test'});
+  res.end('Hello Cookie');
 })
 .listen(8080, () => {
   console.log('서버 대기중');
