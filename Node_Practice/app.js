@@ -9,14 +9,19 @@ var indexRouter = require('./routes/index');
 
 var app = express();
 
+
 app.get('/', (req, res) => {
   res.send('Hello Express');
 })
 
+
+// set => express 설정
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+// user => 미들웨어 (Express 핵심)
+// 요청이 들어오면 app.js를 읽어 app.user를 다 거쳐감
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

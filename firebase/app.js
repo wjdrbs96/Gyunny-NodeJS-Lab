@@ -9,44 +9,9 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
-let room = ['room1', 'room2', 'room3'];
-let a = 0;
-
-var app = express();
-app.io = require('socket.io')();
-
-app.io.on('connection',(socket) => {
-
-  console.log("유저가 들어왔다.")
-
-  // 요거 추가
-  socket.on('joinRoom', (num, name) => {
-    socket.join(room[num], () => {
-      app.io.to(room[num]).emit('joinRoom', num, name);
-    });
-  });
-
-  // 요거 추가
-  socket.on('leaveRoom', (num, name) => {
-    socket.leave(room[num], () => {
-      app.io.to(room[num]).emit('leaveRoom', num, name);
-    });
-  });
-
-  socket.on('disconnect', () => {
-    console.log('유저가 나갔다.');
-  });
-
-  socket.on('chat-msg', (num, name, msg) => {
-    a = num;
-    app.io.to(room[a]).emit('chat-msg', name, msg); // to(room[a])를 통해 그룹에게만 메세지를 날린다.
-  });
-
-});
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(express.json());
