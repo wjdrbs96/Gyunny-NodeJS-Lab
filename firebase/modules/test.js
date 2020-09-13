@@ -34,6 +34,7 @@ const alarm = {
 
         admin.messaging().sendToDevice(registerToken, payload, options).then(function (response) {
             console.log('성공 메세지!' + response);
+            console.log(response);
             return response
         })
         .catch(function (error) {
