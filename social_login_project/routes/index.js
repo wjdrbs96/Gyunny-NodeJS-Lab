@@ -6,4 +6,8 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+router.use('/auth', require('./auth'));
+router.use('/login', require('./login'));
+
+
 module.exports = router;
