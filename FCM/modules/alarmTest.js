@@ -1,9 +1,9 @@
 const admin = require("firebase-admin");
 const alarmModel = require('../models/alarm');
 const firebaseConfig = require('../config/firebase.json');
-const util = require('../modules/util');
-const statusCode = require('../modules/statusCode');
-const resMessage = require('../modules/responseMessage');
+const util = require('./util');
+const statusCode = require('./statusCode');
+const resMessage = require('./responseMessage');
 
 const alarm = {
 
